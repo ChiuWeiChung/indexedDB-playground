@@ -37,7 +37,7 @@ const IndexedDBComponent = () => {
     const store = createStore('MyDB', 'myStore');
     set('something', 'haha', store);
 
-    // create a
+    // create blob
     const arr = [{ name: 'Barry' }, { name: 'John' }, { name: 'Jane' }];
     const blob = new Blob([JSON.stringify(arr)], { type: 'application/json' });
     set('blob', blob, store);

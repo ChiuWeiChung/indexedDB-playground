@@ -9,15 +9,18 @@ const IndexedDBWithVanilla = () => {
 
   useEffect(() => {
     const DBOpenReq = indexedDB.open('pwa-demo', 7);
+
     DBOpenReq.addEventListener('success', (event: Event) => {
       // 如果打開資料庫成功，則會觸發此事件
       const target = event.target as IDBRequest;
       console.log('DBOpenReq success', target.result);
     });
+
     DBOpenReq.addEventListener('error', (event) => {
       // 如果打開資料庫失敗，則會觸發此事件
       console.log('DBOpenReq error', event);
     });
+    
     DBOpenReq.addEventListener('upgradeneeded', (event) => {
       // 如果打開資料庫的版本號與現在的版本號不同，則會觸發此事件 or 第一次打開資料庫時也會觸發此事件
       // NOTE: create & delete 只能在 upgradeneeded 事件中觸發
@@ -27,6 +30,7 @@ const IndexedDBWithVanilla = () => {
       const oldVersion = event.oldVersion;
       const newVersion = event.newVersion || db.version;
       console.log(`DB updated from ${oldVersion} to ${newVersion}`);
+      
       if (!db.objectStoreNames.contains('user')) {
         db.createObjectStore('user', { keyPath: 'id' }); // keyPath 是唯一索引
       }
@@ -42,7 +46,12 @@ const IndexedDBWithVanilla = () => {
     // });
   }, []);
 
-  return <div className="text-center">IndexedDBWithVanilla</div>;
+  return (
+    <div className="text-center p-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold text-white mb-2">IndexedDB With Vanilla</h2>
+      <p className="text-gray-100 text-sm">Using browser native IndexedDB API</p>
+    </div>
+  );
 };
 
 export default IndexedDBWithVanilla;

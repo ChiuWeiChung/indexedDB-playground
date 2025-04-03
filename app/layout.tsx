@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { Toaster } from '@/components/ui/sonner';
 
 import './globals.css';
-import Providers from './providers';
 import { basePath } from '@/constants';
 
 const geistSans = Geist({
@@ -18,8 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   manifest: `${basePath}/manifest.json`,
-  title: 'Push Notification Demo',
-  description: 'PWA 推播通知 DEMO',
+  title: 'IndexedDB Demo',
+  description: 'IndexedDB DEMO',
 };
 
 export default function RootLayout({
@@ -29,18 +27,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" type="image/png" sizes="96x96" href={`${basePath}/icons/icon-96x96.png`} />
-        <link rel="apple-touch-icon" sizes="120x120" href={`${basePath}/icons/icon-120x120.png`} />
-        <link rel="apple-touch-icon" sizes="152x152" href={`${basePath}/icons/icon-152x152.png`} />
-        <link rel="apple-touch-icon" sizes="180x180" href={`${basePath}/icons/icon-180x180.png`} />
-        <link rel="icon" type="image/png" sizes="192x192" href={`${basePath}/icons/icon-192x192.png`} />
-      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Providers>
           {children}
-          <Toaster />
-        </Providers>
       </body>
     </html>
   );
